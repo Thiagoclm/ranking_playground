@@ -1,0 +1,40 @@
+digraph EcommerceSearchEngine {
+	rankdir=TB size="12,12"
+	User [label="User Interaction Layer
+(Search Query, Suggestions)" shape=ellipse]
+	QueryUnderstanding [label="Query Understanding Layer
+(Query Parsing, Spelling Correction,
+NLU, Synonym Expansion)" shape=rectangle]
+	DataRetrieval [label="Data Retrieval Layer
+(Elasticsearch, Kafka Pipeline,
+Product DB)" shape=rectangle]
+	Ranking [label="Ranking Layer
+(Feature Engineering, XGBoost,
+BERT Re-ranker)" shape=rectangle]
+	Personalization [label="Personalization Layer
+(Collaborative Filtering,
+Content-based Filtering,
+Reinforcement Learning)" shape=rectangle]
+	BusinessLogic [label="Business Logic Layer
+(Sponsored Products,
+Stock Status Adjustment)" shape=rectangle]
+	Analytics [label="Analytics and Feedback Loop
+(Logs, Metrics, Model Retraining)" shape=rectangle]
+	Infrastructure [label="Infrastructure Layer
+(Load Balancers, Redis Cache,
+Docker, Kubernetes)" shape=rectangle]
+	User -> QueryUnderstanding
+	QueryUnderstanding -> DataRetrieval
+	DataRetrieval -> Ranking
+	Ranking -> BusinessLogic
+	Ranking -> Personalization
+	BusinessLogic -> Personalization
+	Personalization -> Ranking
+	Ranking -> Analytics
+	Analytics -> DataRetrieval
+	Analytics -> Ranking
+	Ranking -> User
+	Infrastructure -> QueryUnderstanding
+	Infrastructure -> DataRetrieval
+	Infrastructure -> Ranking
+}
